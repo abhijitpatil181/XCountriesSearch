@@ -9,7 +9,7 @@ const Tile = ({ imgUrl, countryName, alt }) => {
           alt={alt}
           style={{ width: "100px", height: "100px" }}
         />
-        <h4>{countryName}</h4>
+        <p style={{ fontSize: "1.2rem" }}>{countryName}</p>
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import Tile from "./Tile";
 const Countries = () => {
   const [allCountry, setAllCountry] = useState([]);
   const [countries, setCountries] = useState([]);
-  const [searchedCountry, setSearchedCountry] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [timerId, setTimerId] = useState(null);
 
   useEffect(() => {
@@ -31,13 +31,14 @@ const Countries = () => {
       return;
     }
     const tempCountries = allCountry.filter((country) =>
-      country.name.common.includes(searchText)
+      country.name.common.toLowerCase().includes(searchText.toLowerCase())
     );
+    console.log(tempCountries);
     setCountries(tempCountries);
   };
 
   const onChangeHandler = (e) => {
-    setSearchedCountry(e.target.value);
+    setSearchTerm(e.target.value);
     let tempTimerId = setTimeout(() => {
       debounceSearch(e.target.value);
     }, 200);
@@ -60,7 +61,7 @@ const Countries = () => {
       >
         <input
           type="text"
-          value={searchedCountry}
+          value={searchTerm}
           placeholder="Search for countries..."
           onChange={(e) => onChangeHandler(e)}
           style={{
